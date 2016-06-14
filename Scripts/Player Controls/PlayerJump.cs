@@ -33,7 +33,7 @@ public class PlayerJump : MonoBehaviour
         if(canJump)
         {
             Jump();
-            canJump = false;
+            //canJump = false;
         }
     }
 
@@ -56,6 +56,8 @@ public class PlayerJump : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * 4 * Time.deltaTime * 3, Space.World);
+            ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 1", false);
         }
     }
+
 }
