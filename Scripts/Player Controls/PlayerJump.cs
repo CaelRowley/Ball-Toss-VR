@@ -13,6 +13,8 @@ public class PlayerJump : MonoBehaviour
     private Vector3 startAcceleration;
     private Vector3 shake;
 
+    private int stage = 1;
+
     public AudioClip audioClipJump;
     private AudioSource audioSource;
 
@@ -55,8 +57,17 @@ public class PlayerJump : MonoBehaviour
         if(Input.GetKeyDown("space"))
         {
             audioSource.PlayOneShot(audioClipJump);
-            transform.Translate(Vector3.up * jumpSpeed * 4 * Time.deltaTime * 3, Space.World);
-            ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 1", false);
+            transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
+            if(stage == 1)
+            {
+                ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 1", false);
+                stage++;
+            }
+            else if(stage==2)
+            {
+                ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 2", false);
+            }
+            
         }
     }
 
