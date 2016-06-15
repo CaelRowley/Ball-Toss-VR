@@ -57,7 +57,7 @@ public class PlayerJump : MonoBehaviour
         if(Input.GetKeyDown("space"))
         {
             audioSource.PlayOneShot(audioClipJump);
-            transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime/2, Space.World);
             if(stage == 1)
             {
                 ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 1", false);
@@ -66,6 +66,7 @@ public class PlayerJump : MonoBehaviour
             else if(stage==2)
             {
                 ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 2", false);
+                stage++;
             }
             
         }
