@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Patrol : MonoBehaviour {
+public class Patrol : MonoBehaviour
+{
 
     public Transform[] points;
     private int destPoint = 0;
