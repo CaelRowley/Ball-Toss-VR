@@ -6,7 +6,6 @@ public class Explode : MonoBehaviour
 
     public void InstantiateExplosion()
     {
-        Debug.Log("InstantiateExplosion");
         Instantiate(spawnedPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
