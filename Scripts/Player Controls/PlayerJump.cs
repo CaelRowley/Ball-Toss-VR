@@ -6,14 +6,12 @@ public class PlayerJump : MonoBehaviour
     public float jumpUpdateTime;
     public float jumpFilterStrength;
     public float jumpShakeLimit;
-    public bool canJump = false;
+    public bool canJump = true;
 
     private float jumpMinShakeFilter;
     private Vector3 currentAcceleration = Vector3.zero;
     private Vector3 startAcceleration;
     private Vector3 shake;
-    private TransitionBetweenStages Transition = new TransitionBetweenStages();
-    private CountingCups countingCups = new CountingCups();
 
     private int stage = 1;
 
@@ -34,10 +32,6 @@ public class PlayerJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Before: " + canJump);
-        canJump = countingCups.verifyCanJump();
-        //Debug.Log("After: " + canJump);
-
         if(canJump)
         {
             Jump();
@@ -57,6 +51,17 @@ public class PlayerJump : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
+
+            if(stage == 1)
+            {
+                ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 1", false);
+                stage++;
+            }
+            else if(stage == 2)
+            {
+                ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 2", false);
+                stage++;
+            }
         }
 
         // The player jumps when space is pressed
@@ -64,7 +69,16 @@ public class PlayerJump : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime / 2, Space.World);
-            Transition.Transition();
+            if(stage == 1)
+            {
+                ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 1", false);
+                stage++;
+            }
+            else if(stage == 2)
+            {
+                ToggleObjectVisiblity.ToggleObjectVisible("Floor Stage 2", false);
+                stage++;
+            }
 
         }
     }

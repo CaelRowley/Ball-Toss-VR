@@ -30,9 +30,9 @@ public class PlayerThrow : MonoBehaviour
             if(canThrow)
             {
                 //Vector3 velocity = CalculateVelocity(targetPosition);
-                CalculateVelocity(targetPosition);
-                //AlternateThrow2(targetPosition);
-
+                //CalculateVelocity(targetPosition);
+                AlternateThrow2(targetPosition);
+                
             }
             else
             {
@@ -49,31 +49,28 @@ public class PlayerThrow : MonoBehaviour
         float distanceToTarget = targetDirection.magnitude;  // get horizontal distance
         targetDirection.y = distanceToTarget;  // set elevation to 45 degrees
         distanceToTarget += directionHeight;  // correct for different heights
-
+       
         float velocity = Mathf.Sqrt(distanceToTarget * Physics.gravity.magnitude * throwMagnitude);
 
-        if(distanceToTarget < 0.4)
+        if(distanceToTarget < 0.5)
         {
             Rigidbody instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody;
             instantiatedProjectile.AddForce(targetDirection * 1.9f, ForceMode.Impulse);
-            Destroy(instantiatedProjectile, 10);
             //Debug.Log("lessthen1");
         }
         else
         {
             Rigidbody instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody;
             instantiatedProjectile.velocity = velocity * targetDirection.normalized;
-            Destroy(instantiatedProjectile, 10);
         }
 
-        //Debug.Log("Distance to target: " + distanceToTarget);
+        Debug.Log("Distance to target: " + distanceToTarget);
     }
     public void AlternateThrow2(Vector3 targetPosition)
     {
-        float ang = 70.0f;
+        float ang = 80.0f;
         Rigidbody instantiatedProjectile = Instantiate(projectile, transform.position, Quaternion.identity) as Rigidbody;
-        instantiatedProjectile.velocity = BalsticVelocity(targetPosition, ang);
-        Destroy(instantiatedProjectile, 10);
+        instantiatedProjectile.velocity = BalsticVelocity(targetPosition,ang);
     }
 
     private Vector3 BalsticVelocity(Vector3 targetPosition, float angle)
@@ -89,10 +86,10 @@ public class PlayerThrow : MonoBehaviour
         //Debug.Log("Target direction " + targetDirection);        
         //float velocity = Mathf.Sqrt(distanceToTarget * Physics.gravity.magnitude * throwMagnitude);        
 
-        float velocity = Mathf.Sqrt(distanceToTarget * Physics.gravity.magnitude / Mathf.Sin(2 * degreesToRadians));
+        float velocity = Mathf.Sqrt(distanceToTarget * Physics.gravity.magnitude / Mathf.Sin(2*degreesToRadians));
         Debug.Log("Vel: " + velocity);
 
-        return velocity * targetDirection.normalized;
+        return velocity*targetDirection.normalized;
     }
-
+    
 }
