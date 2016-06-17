@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CountingCups : MonoBehaviour
+public class CountingContainers : MonoBehaviour
 {
 
     GameObject[] containersInArea;
     public string containerTag = "Red Cup Stage 1 Level 1";
     private int cupCount;
 
-    public void findCupsInArea()
+    public void howManyContainersAreInTheArea()
     {
         cupCount = 0; 
         GameObject[] containersInArea = GameObject.FindGameObjectsWithTag(containerTag);
@@ -21,7 +21,7 @@ public class CountingCups : MonoBehaviour
 
     public bool verifyCanJump()
     {
-        findCupsInArea();
+        howManyContainersAreInTheArea();
         //Debug.Log("Cup count: " + cupCount);
         if(cupCount > 0)
         {

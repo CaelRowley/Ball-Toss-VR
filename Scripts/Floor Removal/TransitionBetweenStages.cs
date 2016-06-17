@@ -2,31 +2,25 @@
 using System.Collections;
 
 public class TransitionBetweenStages : MonoBehaviour {
-    public int stage = 1;
+    //public int stage = 1;
+    public bool level1 = false;
+    public bool level2 = false;
 
-    void Start()
-    {
-        ToggleObjectVisiblity.ToggleObjectVisible("Stage 3", false);
-    }
+
 
     public void Transition(){
-        if(stage == 1)
+        if(level1)
         {
-            ToggleObjectVisiblity.ToggleObjectVisible("Stage " + stage, false);
-            ToggleObjectVisiblity.ToggleObjectVisible("Roof Stage " + (stage + 1), false);
+            ToggleObjectVisiblity.ToggleObjectVisible("Stage 1", false);
+            ToggleObjectVisiblity.ToggleObjectVisible("Roof Stage 2", false);
+            level1 = false;
             ToggleObjectVisiblity.ToggleObjectVisible("Stage 3", true);
-            stage++;
         }
-        else if(stage == 2)
+        else if(level2)
         {
-            ToggleObjectVisiblity.ToggleObjectVisible("Stage " + stage, false);
-            ToggleObjectVisiblity.ToggleObjectVisible("Roof Stage " + (stage + 1), false);
-            stage++;
-        }                    
-    }
-
-    public int checkStage()
-    {
-        return stage;
+            ToggleObjectVisiblity.ToggleObjectVisible("Stage 2", false);
+            ToggleObjectVisiblity.ToggleObjectVisible("Roof Stage 3", false);
+            level2 = false;
+        }            
     }
 }

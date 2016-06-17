@@ -13,9 +13,9 @@ public class PlayerJump : MonoBehaviour
     private Vector3 startAcceleration;
     private Vector3 shake;
     private TransitionBetweenStages Transition = new TransitionBetweenStages();
-    private CountingCups countingCups = new CountingCups();
+    private CountingContainers countingContainers = new CountingContainers();
 
-    private int stage = 1;
+    //private int stage = 1;
 
     public AudioClip audioClipJump;
     private AudioSource audioSource;
@@ -23,6 +23,8 @@ public class PlayerJump : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Transition.level1 = true;
+        ToggleObjectVisiblity.ToggleObjectVisible("Stage 3", false);
         jumpMinShakeFilter = jumpUpdateTime / jumpFilterStrength;
 
         // Creates audio source for player
@@ -35,7 +37,7 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
         //Debug.Log("Before: " + canJump);
-        canJump = countingCups.verifyCanJump();
+        canJump = countingContainers.verifyCanJump();
         //Debug.Log("After: " + canJump);
 
         if(canJump)
@@ -58,13 +60,15 @@ public class PlayerJump : MonoBehaviour
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
         }
-
+        
         // The player jumps when space is pressed
         if(Input.GetKeyDown("space"))
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime / 2, Space.World);
             Transition.Transition();
+            //stage++;
+            //Debug.Log(stage);
 
         }
     }
