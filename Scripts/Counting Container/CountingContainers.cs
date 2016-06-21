@@ -10,12 +10,13 @@ public class CountingContainers : MonoBehaviour
 
     public void howManyContainersAreInTheArea()
     {
-        cupCount = 0; 
-        GameObject[] containersInArea = GameObject.FindGameObjectsWithTag(containerTag);
-        foreach(GameObject container in containersInArea)
-        {
-            cupCount++;
-        }
+        cupCount = GameObject.FindGameObjectsWithTag(containerTag).Length;
+        //GameObject[] containersInArea = GameObject.FindGameObjectsWithTag(containerTag);
+        //cupCount = GameObject.FindGameObjectsWithTag(containerTag).Length
+        //foreach(GameObject container in containersInArea)
+        //{
+        //  cupCount++;
+        //}
     }
     public bool verifyCanJump()
     {

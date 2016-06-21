@@ -9,7 +9,6 @@ public class PlayerStatus : MonoBehaviour
 
     private int numOfTargets = 0;
     private int currentStreak = 0;
-    private int tempAmmoCount = 0;
 
     public GameObject timerGameObject;
     private SceneTimer sceneTimer;
@@ -22,10 +21,7 @@ public class PlayerStatus : MonoBehaviour
         {
             numOfTargets += GameObject.FindGameObjectsWithTag(targetTags[i]).Length;
         }
-
-        Debug.Log("num of targets: " + numOfTargets);
     }
-
 
     public bool HasAmmo()
     {
@@ -49,9 +45,7 @@ public class PlayerStatus : MonoBehaviour
 
         if(numOfTargets <= 0)
         {
-            if(currentStreak >= 3)
-                AddStreakScore();
-
+            AddStreakScore();
             DisplayResults();
         }
     }
@@ -66,6 +60,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void AddStreakScore()
     {
+        // Need formula for adding score
         sceneTimer.SetCurrentTime(sceneTimer.GetCurrentTime() - (currentStreak));
     }
 

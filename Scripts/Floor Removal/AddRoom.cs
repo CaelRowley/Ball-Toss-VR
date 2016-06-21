@@ -2,14 +2,20 @@
 using System.Collections;
 
 public class AddRoom : MonoBehaviour {
+    public string coilliderTag = "Player";
     public string roofName = "Roof Stage 2";
-    GameObject roof;
+    private GameObject roof;
+
     void Start()
     {
         roof = GameObject.Find(roofName);
     }    
     private void OnCollisionEnter(Collision collider)
-    {        
-        roof.SetActive(true);
+    {
+        // Add verify player tag
+        if(collider.gameObject.CompareTag(coilliderTag))
+        {
+            roof.SetActive(true);
+        }       
     }
 }

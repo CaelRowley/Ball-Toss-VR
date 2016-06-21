@@ -5,6 +5,7 @@ public class PlayerProjectileCollision : MonoBehaviour
     public GameObject playerStatusGameObject;
     private PlayerStatus playerStatus;
 
+    public string playerTag = "Player";
     public string[] targetTags;
     private bool hitTarget;
 
@@ -17,7 +18,7 @@ public class PlayerProjectileCollision : MonoBehaviour
 
     void Start()
     {
-        playerStatusGameObject = GameObject.FindGameObjectWithTag("PlayerTemp");
+        playerStatusGameObject = GameObject.FindGameObjectWithTag(playerTag);
         playerStatus = (PlayerStatus)playerStatusGameObject.GetComponent("PlayerStatus");
     }
 
