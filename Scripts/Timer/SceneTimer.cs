@@ -63,4 +63,10 @@ public class SceneTimer : MonoBehaviour
     {
         return currentTime;
     }
+
+    // Returns the current time taken
+    public void SetCurrentTime(int newCurrentTime)
+    {
+        currentTime = newCurrentTime;
+    }
 }

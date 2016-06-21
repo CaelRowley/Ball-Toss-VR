@@ -5,16 +5,22 @@ public class PlayerThrow : MonoBehaviour
 {
     public Rigidbody projectile;
     public float throwDistanceMax;
-    public int projectileCount;
     public float throwMagnitude;
 
     private bool canThrow = true;
     private Vector3 targetPosition;
 
+    public GameObject playerStatusGameObject;
+    private PlayerStatus playerStatus;
+
+    private void Start()
+    {
+        playerStatus = (PlayerStatus)playerStatusGameObject.GetComponent("PlayerStatus");
+    }
+
     private void Update()
     {
-        if(projectileCount <= 0)
-            canThrow = false;
+        canThrow = playerStatus.HasAmmo();
 
         RaycastHit objectHit;
         targetPosition = transform.forward * throwDistanceMax;
@@ -32,6 +38,7 @@ public class PlayerThrow : MonoBehaviour
                 //Vector3 velocity = CalculateVelocity(targetPosition);
                 CalculateVelocity(targetPosition);
                 //AlternateThrow2(targetPosition);
+                playerStatus.SetAmmoCount(playerStatus.GetAmmoCount() - 1);
 
             }
             else
