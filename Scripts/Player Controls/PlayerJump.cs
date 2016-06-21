@@ -7,19 +7,22 @@ public class PlayerJump : MonoBehaviour
     public float jumpFilterStrength;
     public float jumpShakeLimit;
 
-    public bool canJump = false;
-    public bool canJumpStage2 = false;
+    private bool canJump = false;
+    private bool canJumpStage2 = false;
+    private bool stage2 = true;
 
     private float jumpMinShakeFilter;
     private Vector3 currentAcceleration = Vector3.zero;
     private Vector3 startAcceleration;
     private Vector3 shake;
 
-    private TransitionBetweenStages Transition = new TransitionBetweenStages();
-    private CountingContainers countingContainers = new CountingContainers();
-    private CountingContainers countingContainers2 = new CountingContainers();
+    private TransitionBetweenStages transition;
+    private CountingContainers countingContainers;
+    private CountingContainers countingContainers2;
 
-
+    public GameObject transitionGameObject;
+    public GameObject countingContainersGameObject;
+    public GameObject countingContainers2GameObject;
 
     public AudioClip audioClipJump;
     private AudioSource audioSource;
@@ -27,7 +30,9 @@ public class PlayerJump : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        countingContainers2.containerTag="Red Cup Stage 1 Level 2";
+        transition = (TransitionBetweenStages) transitionGameObject.GetComponent("TransitionBetweenStages");
+        countingContainers = (CountingContainers) countingContainersGameObject.GetComponent("CountingContainers");
+        countingContainers2 = (CountingContainers) countingContainers2GameObject.GetComponent("CountingContainers");
 
         jumpMinShakeFilter = jumpUpdateTime / jumpFilterStrength;
 
@@ -41,7 +46,6 @@ public class PlayerJump : MonoBehaviour
     {
         canJump = countingContainers.verifyCanJump();
         canJumpStage2 = countingContainers2.verifyCanJump();
-        //Debug.Log("Can jump S2: " + canJumpStage2);
 
         if(canJump)
         {
@@ -49,7 +53,11 @@ public class PlayerJump : MonoBehaviour
         }
         if(canJumpStage2)
         {
-            Transition.level2 = true;
+            if(stage2)
+            {
+                transition.level2 = true;
+                stage2 = false;
+            } 
             Jump();
         }
     }
@@ -66,7 +74,7 @@ public class PlayerJump : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
-            Transition.Transition();
+            transition.Transition();
         }
 
         // The player jumps when space is pressed
@@ -74,7 +82,7 @@ public class PlayerJump : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime / 2, Space.World);
-            Transition.Transition();
+            transition.Transition();
 
         }
     }

@@ -12,7 +12,7 @@ public class TransitionBetweenStages : MonoBehaviour {
             ToggleObjectVisiblity.ToggleObjectVisible("Stage 1", false);
             ToggleObjectVisiblity.ToggleObjectVisible("Roof Stage 2", false);
             level1 = false;
-            ToggleObjectVisiblity.ToggleObjectVisible("Stage 3", true);
+            //ToggleObjectVisiblity.ToggleObjectVisible("Stage 3", true);
         }
         else if(level2)
         {
