@@ -18,7 +18,10 @@ public class CountingContainers : MonoBehaviour
             //Debug.Log("Cup count: " + cupCount);
         }
     }
-
+    //public void setContainerTag(string changedContainerTag)
+    //{
+    //    changedContainerTag = containerTag;
+    //}
     public bool verifyCanJump()
     {
         howManyContainersAreInTheArea();

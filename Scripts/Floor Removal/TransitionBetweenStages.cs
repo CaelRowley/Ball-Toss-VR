@@ -3,10 +3,8 @@ using System.Collections;
 
 public class TransitionBetweenStages : MonoBehaviour {
     //public int stage = 1;
-    public bool level1 = false;
+    public bool level1 = true;
     public bool level2 = false;
-
-
 
     public void Transition(){
         if(level1)

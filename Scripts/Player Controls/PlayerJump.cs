@@ -6,16 +6,20 @@ public class PlayerJump : MonoBehaviour
     public float jumpUpdateTime;
     public float jumpFilterStrength;
     public float jumpShakeLimit;
+
     public bool canJump = false;
+    public bool canJumpStage2 = false;
 
     private float jumpMinShakeFilter;
     private Vector3 currentAcceleration = Vector3.zero;
     private Vector3 startAcceleration;
     private Vector3 shake;
+
     private TransitionBetweenStages Transition = new TransitionBetweenStages();
     private CountingContainers countingContainers = new CountingContainers();
+    private CountingContainers countingContainers2 = new CountingContainers();
 
-    //private int stage = 1;
+
 
     public AudioClip audioClipJump;
     private AudioSource audioSource;
@@ -23,8 +27,8 @@ public class PlayerJump : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Transition.level1 = true;
-        ToggleObjectVisiblity.ToggleObjectVisible("Stage 3", false);
+        countingContainers2.containerTag="Red Cup Stage 1 Level 2";
+
         jumpMinShakeFilter = jumpUpdateTime / jumpFilterStrength;
 
         // Creates audio source for player
@@ -33,17 +37,20 @@ public class PlayerJump : MonoBehaviour
         audioSource = child.AddComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Before: " + canJump);
         canJump = countingContainers.verifyCanJump();
-        //Debug.Log("After: " + canJump);
+        canJumpStage2 = countingContainers2.verifyCanJump();
+        //Debug.Log("Can jump S2: " + canJumpStage2);
 
         if(canJump)
         {
             Jump();
-            //canJump = false;
+        }
+        if(canJumpStage2)
+        {
+            Transition.level2 = true;
+            Jump();
         }
     }
 
@@ -59,16 +66,15 @@ public class PlayerJump : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime, Space.World);
+            Transition.Transition();
         }
-        
+
         // The player jumps when space is pressed
         if(Input.GetKeyDown("space"))
         {
             audioSource.PlayOneShot(audioClipJump);
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime / 2, Space.World);
             Transition.Transition();
-            //stage++;
-            //Debug.Log(stage);
 
         }
     }

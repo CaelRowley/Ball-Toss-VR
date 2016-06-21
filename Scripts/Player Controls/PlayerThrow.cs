@@ -56,14 +56,14 @@ public class PlayerThrow : MonoBehaviour
         {
             Rigidbody instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody;
             instantiatedProjectile.AddForce(targetDirection * 1.9f, ForceMode.Impulse);
-            Destroy(instantiatedProjectile, 10);
+            Destroy(instantiatedProjectile, 3f);
             //Debug.Log("lessthen1");
         }
         else
         {
             Rigidbody instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody;
             instantiatedProjectile.velocity = velocity * targetDirection.normalized;
-            Destroy(instantiatedProjectile, 10);
+            //Destroy(instantiatedProjectile, 3f);
         }
 
         //Debug.Log("Distance to target: " + distanceToTarget);
@@ -73,7 +73,7 @@ public class PlayerThrow : MonoBehaviour
         float ang = 70.0f;
         Rigidbody instantiatedProjectile = Instantiate(projectile, transform.position, Quaternion.identity) as Rigidbody;
         instantiatedProjectile.velocity = BalsticVelocity(targetPosition, ang);
-        Destroy(instantiatedProjectile, 10);
+        //Destroy(instantiatedProjectile, 10);
     }
 
     private Vector3 BalsticVelocity(Vector3 targetPosition, float angle)
