@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System;
+using System.Collections;
 
 public class PlayerThrow : MonoBehaviour
 {
@@ -13,14 +13,19 @@ public class PlayerThrow : MonoBehaviour
     public GameObject playerStatusGameObject;
     private PlayerStatus playerStatus;
 
+    public float throwCooldown;
+    private int timeAfterThrow;
+
     private void Start()
     {
         playerStatus = (PlayerStatus)playerStatusGameObject.GetComponent("PlayerStatus");
+        timeAfterThrow = (int)throwCooldown;
+        StartCoroutine("ThrowTimer");
     }
 
     private void Update()
     {
-        canThrow = playerStatus.HasAmmo();
+        canThrow = playerStatus.HasAmmo() && (timeAfterThrow >= throwCooldown);
 
         RaycastHit objectHit;
         targetPosition = transform.forward * throwDistanceMax;
@@ -39,11 +44,11 @@ public class PlayerThrow : MonoBehaviour
                 CalculateVelocity(targetPosition);
                 //AlternateThrow2(targetPosition);
                 playerStatus.SetAmmoCount(playerStatus.GetAmmoCount() - 1);
-
+                timeAfterThrow = 0;
             }
             else
             {
-                Debug.Log("Out of projectiles.");
+                Debug.Log("Can't throw");
             }
         }
     }
@@ -102,4 +107,13 @@ public class PlayerThrow : MonoBehaviour
         return velocity * targetDirection.normalized;
     }
 
+    // Adds 1 to currentTime every second
+    private IEnumerator ThrowTimer()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+            timeAfterThrow += 1;
+        }
+    }
 }

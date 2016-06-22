@@ -9,9 +9,12 @@ public class PlayerStatus : MonoBehaviour
 
     private int numOfTargets = 0;
     private int currentStreak = 0;
+    private int minimumStreakRequired = 3;
 
     public GameObject timerGameObject;
     private SceneTimer sceneTimer;
+
+    public bool infiniteAmmo;
 
     private void Start()
     {
@@ -25,7 +28,10 @@ public class PlayerStatus : MonoBehaviour
 
     public bool HasAmmo()
     {
-        return ammoCount > 0 ? true : false;
+        if(infiniteAmmo)
+            return true;
+        else
+            return ammoCount > 0 ? true : false;
     }
 
     public int GetAmmoCount()
@@ -61,11 +67,22 @@ public class PlayerStatus : MonoBehaviour
     private void AddStreakScore()
     {
         // Need formula for adding score
-        sceneTimer.SetCurrentTime(sceneTimer.GetCurrentTime() - (currentStreak));
+        sceneTimer.SetCurrentTime(sceneTimer.GetCurrentTime() - calculateBonus());
     }
 
     private void DisplayResults()
     {
         sceneTimer.SaveTime();
+    }
+
+    private int calculateBonus()
+    {
+        if(currentStreak > minimumStreakRequired)
+        {
+            double bonus = Math.Pow(2, (currentStreak - 1));
+            return (int)bonus;
+        }
+        else
+            return 0;
     }
 }
