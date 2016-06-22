@@ -6,6 +6,7 @@ public class PlayerJumpControl : MonoBehaviour
 
     private bool canJump = false;
     private bool canJumpStage2 = false;
+    private bool stage1 = true;
     private bool stage2 = true;
 
     private TransitionBetweenStages transition;
@@ -35,19 +36,17 @@ public class PlayerJumpControl : MonoBehaviour
         canJump = countingContainers.verifyCanJump();
         canJumpStage2 = countingContainers2.verifyCanJump();
 
-        if(canJump)
+        if(canJump && stage1)
         {
             textureFlash.StartTextureFlash();
             gameObject.GetComponent<PlayerJump>().canTransition = true;
+            stage1 = false;
         }
-        if(canJumpStage2)
+        if(canJumpStage2 && stage2)
         {
-            if(stage2)
-            {
-                transition.level2 = true;
-                stage2 = false;
-            }
+            transition.level2 = true;
             gameObject.GetComponent<PlayerJump>().canTransition = true;
+            stage2 = false;
         }
     }
 
