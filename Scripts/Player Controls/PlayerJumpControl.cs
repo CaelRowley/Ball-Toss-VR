@@ -11,10 +11,12 @@ public class PlayerJumpControl : MonoBehaviour
     private TransitionBetweenStages transition;
     private CountingContainers countingContainers;
     private CountingContainers countingContainers2;
+    private TextureFlash textureFlash;
 
     public GameObject transitionGameObject;
     public GameObject countingContainersGameObject;
     public GameObject countingContainers2GameObject;
+    public GameObject textureFlashGameObject;
 
     // Use this for initialization
     void Start()
@@ -24,6 +26,7 @@ public class PlayerJumpControl : MonoBehaviour
         transition = (TransitionBetweenStages)transitionGameObject.GetComponent("TransitionBetweenStages");
         countingContainers = (CountingContainers)countingContainersGameObject.GetComponent("CountingContainers");
         countingContainers2 = (CountingContainers)countingContainers2GameObject.GetComponent("CountingContainers");
+        textureFlash = (TextureFlash)textureFlashGameObject.GetComponent("TextureFlash");
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class PlayerJumpControl : MonoBehaviour
 
         if(canJump)
         {
+            textureFlash.StartTextureFlash();
             gameObject.GetComponent<PlayerJump>().canTransition = true;
         }
         if(canJumpStage2)
