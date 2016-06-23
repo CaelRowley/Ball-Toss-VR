@@ -12,10 +12,4 @@ public class ButtonTextScript : MonoBehaviour
         TextMesh textMesh = (TextMesh)button.GetComponent("TextMesh");
         textMesh.text = textToDisplay;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
