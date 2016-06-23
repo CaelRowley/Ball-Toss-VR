@@ -6,8 +6,8 @@ public class ExitDoorScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision colllider)
     {
-        Debug.Log("Exit Collision");
+        //Debug.Log("Exit Collision");
         //Application.Quit();
-        //SceneManager.LoadScene("Level 1 Office");
+        SceneManager.LoadScene("Main Menu");
     }
 }
