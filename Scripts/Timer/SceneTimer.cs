@@ -28,6 +28,8 @@ public class SceneTimer : MonoBehaviour
     // Saves the time to player prefs
     public void SaveTime()
     {
+        StopCoroutine("Timer");
+
         for(int i = 0; i < bestTimes.Length; i++)
         {
             bestTimeKey = bestTimes + (i + 1).ToString();
