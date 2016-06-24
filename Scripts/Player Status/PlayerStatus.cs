@@ -16,9 +16,17 @@ public class PlayerStatus : MonoBehaviour
 
     public bool infiniteAmmo;
 
+    public GameObject displayPlayerTimeGameObject;
+    private DisplayPlayerTime displayPlayerTime;
+
+    public GameObject menuPositionControllerObj;
+    private MenuPositionController menuPositionController;
+
     private void Start()
     {
         sceneTimer = (SceneTimer)timerGameObject.GetComponent("SceneTimer");
+        displayPlayerTime = (DisplayPlayerTime)displayPlayerTimeGameObject.GetComponent("DisplayPlayerTime");
+        menuPositionController = (MenuPositionController)menuPositionControllerObj.GetComponent("MenuPositionController");
 
         for(int i = 0; i < targetTags.Length; i++)
         {
@@ -73,6 +81,8 @@ public class PlayerStatus : MonoBehaviour
     private void DisplayResults()
     {
         sceneTimer.SaveTime();
+        displayPlayerTime.DisplayTime(sceneTimer.GetCurrentTime());
+        menuPositionController.ShowMenu();
     }
 
     private int calculateBonus()
