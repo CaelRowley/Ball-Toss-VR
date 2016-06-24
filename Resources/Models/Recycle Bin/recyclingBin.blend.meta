@@ -1,15 +1,30 @@
 fileFormatVersion: 2
-guid: 9f2be9ccbe9a08b4997e3c2b5e0ba265
-timeCreated: 1465920272
+guid: 31a32a5041d89d64ab9a79a6c0e17af7
+timeCreated: 1466700062
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cylinder
+    100000: bag
+    100002: cap
+    100004: //RootNode
+    100006: top
+    400000: bag
+    400002: cap
+    400004: //RootNode
+    400006: top
+    2300000: bag
+    2300002: cap
+    2300004: //RootNode
+    2300006: top
+    3300000: bag
+    3300002: cap
+    3300004: //RootNode
+    3300006: top
+    4300000: bin
+    4300002: top
+    4300004: cap
+    4300006: bag
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -41,7 +56,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

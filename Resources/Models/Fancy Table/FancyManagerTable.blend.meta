@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9f2be9ccbe9a08b4997e3c2b5e0ba265
-timeCreated: 1465920272
+guid: 8bdb79a7ded2e5f45a3e2df34e1c2761
+timeCreated: 1466781451
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
+    4300000: Desk
     7400000: Default Take
     9500000: //RootNode
   materials:

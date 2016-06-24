@@ -1,15 +1,37 @@
 fileFormatVersion: 2
-guid: 9f2be9ccbe9a08b4997e3c2b5e0ba265
-timeCreated: 1465920272
+guid: 5fbfbcc74428a2843a90531bce031bab
+timeCreated: 1466777638
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Bookshelves
+    100004: Bookshelves_001
+    100006: Bookshelves_002
+    100008: Bookshelves_003
+    100010: Bookshelves_004
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cylinder
+    400002: Bookshelves
+    400004: Bookshelves_001
+    400006: Bookshelves_002
+    400008: Bookshelves_003
+    400010: Bookshelves_004
+    2300000: Bookshelves
+    2300002: Bookshelves_001
+    2300004: Bookshelves_002
+    2300006: Bookshelves_003
+    2300008: Bookshelves_004
+    3300000: Bookshelves
+    3300002: Bookshelves_001
+    3300004: Bookshelves_002
+    3300006: Bookshelves_003
+    3300008: Bookshelves_004
+    4300000: Bookshelves_003
+    4300002: Bookshelves_004
+    4300004: Bookshelves_002
+    4300006: Bookshelves_001
+    4300008: Bookshelves
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -41,7 +63,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

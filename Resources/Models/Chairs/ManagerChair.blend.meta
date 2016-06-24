@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: 9f2be9ccbe9a08b4997e3c2b5e0ba265
-timeCreated: 1465920272
+guid: 58ef4bc553a1a544e85327c96669a677
+timeCreated: 1466781151
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cylinder
+    100000: Chair
+    100002: Chair-Cushion
+    100004: //RootNode
+    400000: Chair
+    400002: Chair-Cushion
+    400004: //RootNode
+    2300000: Chair
+    2300002: Chair-Cushion
+    3300000: Chair
+    3300002: Chair-Cushion
+    4300000: Chair-Cushion
+    4300002: Chair
     7400000: Default Take
     9500000: //RootNode
   materials:
