@@ -16,14 +16,14 @@ public class PlayerJump : MonoBehaviour
     private AudioSource audioSource;
 
     public GameObject PlayerJumpControlObject;
-    private PlayerJumpControl playerJumpControl;
+    private PlayerJumpController playerJumpController;
 
     public bool canTransition = false;
 
     // Use this for initialization
     void Start()
     {
-        playerJumpControl = (PlayerJumpControl)PlayerJumpControlObject.GetComponent("PlayerJumpControl");
+        playerJumpController = (PlayerJumpController)PlayerJumpControlObject.GetComponent("PlayerJumpController");
         jumpMinShakeFilter = jumpUpdateTime / jumpFilterStrength;
 
         // Creates audio source for player
@@ -46,7 +46,7 @@ public class PlayerJump : MonoBehaviour
             transform.Translate((Vector3.up * jumpSpeed * Time.deltaTime) / 4, Space.World);
             if(canTransition)
             {
-                playerJumpControl.Transition();
+                playerJumpController.Transition();
                 canTransition = false;
             }
         }
@@ -58,7 +58,7 @@ public class PlayerJump : MonoBehaviour
             transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime / 4, Space.World);
             if(canTransition)
             {
-                playerJumpControl.Transition();
+                playerJumpController.Transition();
                 canTransition = false;
             }
         }
