@@ -28,7 +28,7 @@ public class MenuButtonController : MonoBehaviour
         // Doesn't allow the button to move behind its starting position
         if(transform.localPosition.x > defaultPosition.x && !isButtonClicked)
         {
-            Debug.Log("reset");
+            //Debug.Log("reset");
             //ResetPosition();
         }
 
