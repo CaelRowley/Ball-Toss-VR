@@ -9,4 +9,9 @@ public class Lifespan : MonoBehaviour
     {
         Destroy(gameObject, lifespan);
     }
+
+    public void setLifeSpan(int newLifeSpan)
+    {
+        lifespan = newLifeSpan;
+    }
 }

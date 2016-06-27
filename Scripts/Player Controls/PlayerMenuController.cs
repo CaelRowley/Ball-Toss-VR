@@ -64,7 +64,7 @@ public class PlayerMenuController : MonoBehaviour
         if(!isAudioPlaying)
         {
             StartCoroutine("SFXTimer");
-            audioSource.PlayOneShot(sfx);
+            audioSource.PlayOneShot(sfx, 0.5f);
             isAudioPlaying = true;
         }
 

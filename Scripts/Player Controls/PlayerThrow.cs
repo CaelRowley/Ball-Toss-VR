@@ -46,10 +46,6 @@ public class PlayerThrow : MonoBehaviour
                 playerStatus.SetAmmoCount(playerStatus.GetAmmoCount() - 1);
                 timeAfterThrow = 0;
             }
-            else
-            {
-                Debug.Log("Can't throw");
-            }
         }
     }
 
