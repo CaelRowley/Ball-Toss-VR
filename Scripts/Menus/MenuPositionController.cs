@@ -9,9 +9,14 @@ public class MenuPositionController : MonoBehaviour
     private bool showMenu = false;
     private float distanceMoved = 0f;
 
+    public AudioClip audioClip;
+    private AudioSource audioSource;
+
     void Start()
     {
-
+        GameObject child = new GameObject("SFX Player");
+        child.transform.parent = gameObject.transform;
+        audioSource = child.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -24,9 +29,9 @@ public class MenuPositionController : MonoBehaviour
                 transform.Translate(0, moveSpeed * Time.deltaTime, 0);
                 distanceMoved += Vector3.Distance(oldPosition, transform.position);
             }
+            else if(distanceMoved >= menuHeight)
+                audioSource.Stop();
         }
-        // Move button back
-
         else
         {
             if(distanceMoved > 0)
@@ -41,6 +46,7 @@ public class MenuPositionController : MonoBehaviour
     public void ShowMenu()
     {
         showMenu = true;
+        audioSource.PlayOneShot(audioClip);
     }
 
     public void HideMenu()

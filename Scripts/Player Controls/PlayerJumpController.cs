@@ -19,6 +19,10 @@ public class PlayerJumpController : MonoBehaviour
     public GameObject countingContainers2GameObject;
     public GameObject textureFlashGameObject;
 
+    public AudioClip audioClipReadyToJump;
+    private AudioSource audioSource;
+    public float audioClipVolume;
+
     // Use this for initialization
     void Start()
     {
@@ -28,6 +32,10 @@ public class PlayerJumpController : MonoBehaviour
         countingContainers = (CountingContainers)countingContainersGameObject.GetComponent("CountingContainers");
         countingContainers2 = (CountingContainers)countingContainers2GameObject.GetComponent("CountingContainers");
         textureFlash = (TextureFlash)textureFlashGameObject.GetComponent("TextureFlash");
+
+        GameObject child = new GameObject("SFX Player");
+        child.transform.parent = gameObject.transform;
+        audioSource = child.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,12 +46,14 @@ public class PlayerJumpController : MonoBehaviour
 
         if(canJump && stage1)
         {
+            StartCoroutine("PlaySoundTwice");
             textureFlash.StartTextureFlash();
             gameObject.GetComponent<PlayerJump>().canTransition = true;
             stage1 = false;
         }
         if(canJumpStage2 && stage2)
         {
+            StartCoroutine("PlaySoundTwice");
             transition.level2 = true;
             gameObject.GetComponent<PlayerJump>().canTransition = true;
             stage2 = false;
@@ -53,5 +63,13 @@ public class PlayerJumpController : MonoBehaviour
     public void Transition()
     {
         transition.Transition();
+    }
+
+    private IEnumerator PlaySoundTwice()
+    {
+        audioSource.PlayOneShot(audioClipReadyToJump);
+        yield return new WaitForSeconds(0.2f);
+        audioSource.Stop();
+        audioSource.PlayOneShot(audioClipReadyToJump);
     }
 }

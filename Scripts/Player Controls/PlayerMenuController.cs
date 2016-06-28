@@ -49,8 +49,6 @@ public class PlayerMenuController : MonoBehaviour
                 audioSource.Stop();
                 isAudioPlaying = false;
             }
-            targetPosition = objectHit.point;
-            Debug.DrawLine(targetPosition, transform.position, Color.red, 1.0f, false);
         }
         else if(isAudioPlaying)
         {

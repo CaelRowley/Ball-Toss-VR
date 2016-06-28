@@ -4,6 +4,7 @@ using System;
 
 public class PlayerStatus : MonoBehaviour
 {
+    public float menuDelay;
     public int ammoCount;
     public string[] targetTags;
 
@@ -60,7 +61,7 @@ public class PlayerStatus : MonoBehaviour
         if(numOfTargets <= 0)
         {
             AddStreakScore();
-            DisplayResults();
+            StartCoroutine("DisplayResults");
         }
     }
 
@@ -78,8 +79,9 @@ public class PlayerStatus : MonoBehaviour
         sceneTimer.SetCurrentTime(sceneTimer.GetCurrentTime() - calculateBonus());
     }
 
-    private void DisplayResults()
+    private IEnumerator DisplayResults()
     {
+        yield return new WaitForSeconds(menuDelay);
         sceneTimer.SaveTime();
         displayPlayerTime.DisplayTime(sceneTimer.GetCurrentTime());
         menuPositionController.ShowMenu();
