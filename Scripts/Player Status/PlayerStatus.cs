@@ -31,7 +31,6 @@ public class PlayerStatus : MonoBehaviour
         for(int i = 0; i < targetTags.Length; i++)
         {
             numOfTargets += GameObject.FindGameObjectsWithTag(targetTags[i]).Length;
-            Debug.Log("Num of targets: " + numOfTargets);
         }
     }
 
@@ -63,7 +62,6 @@ public class PlayerStatus : MonoBehaviour
             AddStreakScore();
             DisplayResults();
         }
-        Debug.Log("Num of targets left: " + numOfTargets);
     }
 
     public void TargetMiss()
@@ -82,7 +80,6 @@ public class PlayerStatus : MonoBehaviour
 
     private void DisplayResults()
     {
-        Debug.Log("show menu");
         sceneTimer.SaveTime();
         displayPlayerTime.DisplayTime(sceneTimer.GetCurrentTime());
         menuPositionController.ShowMenu();

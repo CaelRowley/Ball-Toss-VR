@@ -9,12 +9,7 @@ public class PlayerProjectileCollision : MonoBehaviour
     public string[] targetTags;
     private bool hitTarget;
 
-    public float collisionTimeRequired = 1.0f;
-    public string colliderTag = "Player";
     public string messageToSend = "InstantiateExplosion";
-
-    private bool continueTimer = false;
-    private float collisionCurrentTime = 0.0f;
 
     void Start()
     {
@@ -24,27 +19,12 @@ public class PlayerProjectileCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision collider)
     {
-        continueTimer = true;
-    }
-
-    void OnCollisionExit(Collision collider)
-    {
-        continueTimer = false;
-        collisionCurrentTime = 0.0f;
-    }
-
-    void OnCollisionStay(Collision collider)
-    {
-        collisionCurrentTime += Time.deltaTime;
-
-        if(collisionCurrentTime > collisionTimeRequired && continueTimer)
+        for(int i = 0; i < targetTags.Length; i++)
         {
-            for(int i = 0; i < targetTags.Length; i++)
+            if(collider.gameObject.CompareTag(targetTags[i]))
             {
-                if(collider.gameObject.CompareTag(targetTags[i]))
-                {
-                    hitTarget = true;
-                }
+                hitTarget = true;
+                Destroy(gameObject, 0.1f);
             }
         }
     }
