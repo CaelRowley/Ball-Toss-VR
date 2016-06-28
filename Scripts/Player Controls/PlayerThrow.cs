@@ -98,7 +98,7 @@ public class PlayerThrow : MonoBehaviour
         //float velocity = Mathf.Sqrt(distanceToTarget * Physics.gravity.magnitude * throwMagnitude);        
 
         float velocity = Mathf.Sqrt(distanceToTarget * Physics.gravity.magnitude / Mathf.Sin(2 * degreesToRadians));
-        Debug.Log("Vel: " + velocity);
+        //Debug.Log("Vel: " + velocity);
 
         return velocity * targetDirection.normalized;
     }
