@@ -3,13 +3,11 @@ using System.Collections;
 using System;
 using UnityEngine.SceneManagement;
 
-public class StartGameButton : Button
+public class SpherePopUp : PopUp
 {
-    public string sceneName;
-
     public override void Activate()
     {
-        SceneManager.LoadScene(sceneName);
+        Debug.Log("SpherePopUp Activate()");
+        transform.Translate((Vector3.forward * 2), Space.World);
     }
-
 }

@@ -103,7 +103,7 @@ public class MenuButtonController : MonoBehaviour
     {
         button = (Button)transform.GetComponent(buttonType);
         yield return new WaitForSeconds(buttonDelay);
-        button.activate();
+        button.Activate();
     }
 
     private void ResetPosition()

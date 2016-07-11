@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
-public abstract class Button : MonoBehaviour
+public abstract class PopUp : MonoBehaviour
 {
     public abstract void Activate();
 }
