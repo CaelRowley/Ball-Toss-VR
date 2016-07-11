@@ -4,34 +4,50 @@ using System;
 
 public class PlayerStatus : MonoBehaviour
 {
-    public float menuDelay;
+    public float displayScoreDelay;
     public int ammoCount;
     public string[] targetTags;
 
     private int numOfTargets = 0;
-    private int currentStreak = 0;
+    private int numOfTargetsHit = 0;
     private int minimumStreakRequired = 3;
 
     public GameObject timerGameObject;
-    private SceneTimer sceneTimer;
+    private ScoreSystem scoreSystem;
 
     public bool infiniteAmmo;
+    public bool hasTimer;
 
-    public GameObject displayPlayerTimeGameObject;
-    private DisplayPlayerTime displayPlayerTime;
+    public GameObject displayPlayerScoreGameObject;
+    private DisplayPlayerScore displayPlayerScore;
 
     public GameObject menuPositionControllerObj;
     private MenuPositionController menuPositionController;
 
+    private int currentTime = 0;
+    private bool isLevelFinished = false;
+
     private void Start()
     {
-        sceneTimer = (SceneTimer)timerGameObject.GetComponent("SceneTimer");
-        displayPlayerTime = (DisplayPlayerTime)displayPlayerTimeGameObject.GetComponent("DisplayPlayerTime");
+        if(hasTimer)
+            StartCoroutine("Timer");
+
+        scoreSystem = (ScoreSystem)timerGameObject.GetComponent("ScoreSystem");
+        displayPlayerScore = (DisplayPlayerScore)displayPlayerScoreGameObject.GetComponent("DisplayPlayerScore");
         menuPositionController = (MenuPositionController)menuPositionControllerObj.GetComponent("MenuPositionController");
 
         for(int i = 0; i < targetTags.Length; i++)
         {
             numOfTargets += GameObject.FindGameObjectsWithTag(targetTags[i]).Length;
+        }
+    }
+
+    private void Update()
+    {
+        if(isLevelFinished)
+        {
+            StartCoroutine("DisplayResults");
+            isLevelFinished = false;
         }
     }
 
@@ -55,46 +71,41 @@ public class PlayerStatus : MonoBehaviour
 
     public void TargetHit()
     {
-        currentStreak++;
+        numOfTargetsHit++;
         numOfTargets--;
-
         if(numOfTargets <= 0)
-        {
-            AddStreakScore();
-            StartCoroutine("DisplayResults");
-        }
+            isLevelFinished = true;
     }
 
     public void TargetMiss()
     {
-        if(numOfTargets > 0)
-            AddStreakScore();
-
-        currentStreak = 0;
-    }
-
-    private void AddStreakScore()
-    {
-        // Need formula for adding score
-        sceneTimer.SetCurrentTime(sceneTimer.GetCurrentTime() - calculateBonus());
+        // If miss
     }
 
     private IEnumerator DisplayResults()
     {
-        yield return new WaitForSeconds(menuDelay);
-        sceneTimer.SaveTime();
-        displayPlayerTime.DisplayTime(sceneTimer.GetCurrentTime());
+        if(hasTimer)
+            scoreSystem.SaveScore(currentTime);
+        else
+            scoreSystem.SaveScore(numOfTargetsHit);
+
+        yield return new WaitForSeconds(displayScoreDelay);
+        displayPlayerScore.DisplayScore(scoreSystem.GetCurrentScore());
         menuPositionController.ShowMenu();
     }
 
-    private int calculateBonus()
+    // Adds 1 to currentTime every second
+    private IEnumerator Timer()
     {
-        if(currentStreak > minimumStreakRequired)
+        while(true)
         {
-            double bonus = Math.Pow(2, (currentStreak - 1));
-            return (int)bonus;
+            yield return new WaitForSeconds(1);
+            currentTime += 1;
         }
-        else
-            return 0;
+    }
+
+    public void SetNumOfTargets(int newNumOfTargets)
+    {
+        numOfTargets = newNumOfTargets;
     }
 }

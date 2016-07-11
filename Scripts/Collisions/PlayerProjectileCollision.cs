@@ -9,8 +9,6 @@ public class PlayerProjectileCollision : MonoBehaviour
     public string[] targetTags;
     private bool hitTarget;
 
-    public string messageToSend = "InstantiateExplosion";
-
     void Start()
     {
         playerStatusGameObject = GameObject.FindGameObjectWithTag(playerTag);
